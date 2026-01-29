@@ -1,7 +1,7 @@
 const {test,expect} = require('@playwright/test'); // it will impots the playwright testing liberary 
 
 
-test .only("End-To-End Web Automation" , async({browser}) => { 
+test ("End-To-End Web Automation" , async({browser}) => { 
   
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -43,11 +43,11 @@ test .only("End-To-End Web Automation" , async({browser}) => {
          break;
       }
    }
-   expect(page.locator(".user__name  [type='text']").first()).toHaveText(email);
+   await expect(page.locator(".user__name  [type='text']").first()).toHaveText(email);
    await expect(page.locator(".field [type='text']").first()).toHaveValue(value);
    //await page.locator("[fdprocessedid='c']").fill("finedev");
     await page.locator(".action__submit ").click();
-    expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
+    await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
     const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
     console.log(orderId);
     await page.locator("button[routerlink*=myorders]").click();
